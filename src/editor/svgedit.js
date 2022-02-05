@@ -16,7 +16,7 @@
 */
 
 // eslint-disable-next-line node/no-unpublished-import
-import deparam from 'deparam';
+//import deparam from 'deparam';
 
 import './touch.js';
 import {NS} from '../common/namespaces.js';
@@ -651,7 +651,9 @@ editor.init = () => {
     const {search, searchParams} = new URL(location);
 
     if (search) {
-      urldata = deparam(searchParams.toString(), true);
+      //urldata = deparam(searchParams.toString(), true);
+      //var search = location.search.substring(1);
+      urldata = JSON.parse('{"' + decodeURI(searchParams.toString()).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g,'":"') + '"}')
 
       ['initStroke', 'initFill'].forEach((prop) => {
         if (searchParams.has(`${prop}[color]`)) {
